@@ -47,7 +47,7 @@
    </button>
    <a class="navbar-brand" href="#">Gextract</a>
    <div class="navbar-collapse collapse navbar-responsive-collapse">
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav pull-right">
      <% if user_signed_in? %>
       <li><%= link_to "Account_Settings", edit_user_registration_path %> </li>
       <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
@@ -70,18 +70,20 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-
-
    </div>
+     <% if user_signed_in? %>
    <div class="col-lg-3">
     <div class="well sidebar-nav">
      <h3>Menu</h3>
      <ul class="nav nav-list">
+      <li><%= link_to "Upload keywords", keywords_path %></li>
       <li><%= link_to "Reports", "/path1"  %></li>
       <li><%= link_to "Run Query", "/path2"  %></li>
      </ul>
     </div><!--/.well -->
    </div><!--/span-->
+   <% end %>
+
   </div><!--/row-->
 
   <footer>

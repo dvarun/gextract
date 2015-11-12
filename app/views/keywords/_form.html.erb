@@ -1,4 +1,9 @@
+<h3> Upload your keywords</h3>
 <%= form_tag({:action => :create}, multipart: true) do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag( "Upload" ) %>
+<div class="form-group">
+ <label for="file">File Upload</label>
+ <%= file_field_tag :file %>
+ <p class="help-block">Please upload only CSV file</p>
+ <%= submit_tag "upload", :class => "btn btn-primary" %>
+</div>
 <% end %>
