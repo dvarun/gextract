@@ -20,7 +20,7 @@ class KeywordsController < ApplicationController
    @keyword.user_id = current_user.id
    @keyword.save
   end
-  @words = Keyword.where(user_id: current_user.id).limit(2)
+  @words = Keyword.where(user_id: current_user.id)
 
   count = 0
   @all_links = []
@@ -34,7 +34,12 @@ class KeywordsController < ApplicationController
 
   @words.each do |keyword|
    begin
-    page = open "http://www.google.com/search?q=#{keyword.word}"
+    search_key = keyword.word.gsub! ' ','+'
+    if search_key.nil?
+     page = open "http://www.google.com/search?q=#{keyword.word}"
+    else
+     page = open "http://www.google.com/search?q=#{search_key}"
+    end
     #page = open "http://www.google.com/search?q=hello"
     doc = Nokogiri::HTML page
     doc.xpath('//cite').each do |node| #all_links
