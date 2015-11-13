@@ -15,13 +15,12 @@ class KeywordsController < ApplicationController
  def create
   myfile = params[:file]
   CSV.foreach(myfile.path) do |row|
-   # @keyword = Keyword.new
-   # @keyword.word = row.shift.strip
-   # @keyword.user_id = current_user.id
-   # @keyword.save
-   # @words << row.shift.strip
+   @keyword = Keyword.new
+   @keyword.word = row.shift.strip
+   @keyword.user_id = current_user.id
+   @keyword.save
   end
-  @words = Keyword.where(user_id: current_user.id).limit(10)
+  @words = Keyword.where(user_id: current_user.id).limit(2)
 
   count = 0
   @all_links = []
@@ -31,47 +30,61 @@ class KeywordsController < ApplicationController
   @right_adwords_url = []
   @all_non_adwords = []
   @all_non_adwords_url = []
-  for keyword in @words
-   # begin
-   #  page = open "http://www.google.com/search?q=#{keyword.word.gsub! ' ','+'}"
-   #   page = open "http://www.google.com/search?q=Best+Vps+Hosting"
-   # rescue Errno::ECONNRESET => e
-   #  count += 1
-   #  retry unless count > 10
-   # end
-   #
-  end
-  page = open "https://www.google.com/search?q=best+vps+Hosting"
-  doc = Nokogiri::HTML page
-  doc.xpath('//cite').each do |node| #all_links
-   @all_links << node.text
+  @stored_words = []
+
+  @words.each do |keyword|
+   begin
+    page = open "http://www.google.com/search?q=#{keyword.word}"
+    #page = open "http://www.google.com/search?q=hello"
+    doc = Nokogiri::HTML page
+    doc.xpath('//cite').each do |node| #all_links
+     @all_links << node.text
+    end
+
+    doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').each do |node| #top_adwords
+     @top_adwords << node.text
+    end
+
+    doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').each do |node| #top_adwords_url
+     @top_adwords_url << node.text
+    end
+
+    doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').each do |node| #right_adwords
+     @right_adwords << node.text
+    end
+
+    doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').each do |node| #right_adwords_url
+     @right_adwords_url << node.text
+    end
+
+    @total_adwords = @top_adwords.count +  @right_adwords.count
+
+    doc.xpath('//div[@id="res"]//h3').each do |node| #all_non_adwords
+     @all_non_adwords << node.text
+    end
+
+    doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords_url
+     @all_non_adwords_url << node.text
+    end
+   rescue Errno::ECONNRESET => e
+    count += 1
+    retry unless count > 5
+   end
   end
 
-  doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').each do |node| #top_adwords
-   @top_adwords << node.text
-  end
+  #page = open "http://www.google.com/search?q=best+vps+Hosting"
 
-  doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').each do |node| #top_adwords_url
-   @top_adwords_url << node.text
-  end
 
-  doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').each do |node| #right_adwords
-   @right_adwords << node.text
-  end
 
-  doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').each do |node| #right_adwords_url
-   @right_adwords_url << node.text
-  end
-
-  @total_adwords = @top_adwords.count +  @right_adwords.count
-
-  doc.xpath('//div[@id="res"]//h3').each do |node| #all_non_adwords
-   @all_non_adwords << node.text
-  end
-
-  doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords_url
-   @all_non_adwords_url << node.text
-  end
+  # @keyword_count = KeywordCount.new
+  # @keyword_count.id = 1
+  # @keyword_count.user_id = current_user.id
+  # @keyword_count.top_count = @top_adwords.count
+  # @keyword_count.right_count = @right_adwords.count
+  # @keyword_count.total_adword_count =  @total_adwords
+  # @keyword_count.normal_count = @all_non_adwords.count
+  # @keyword_count.total_count =  @all_non_adwords.count + @total_adwords
+  # @keyword_count.save
 
 
 
