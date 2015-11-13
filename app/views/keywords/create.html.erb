@@ -1,9 +1,31 @@
-<% for word in @words %>
-<%= word %>
+
+<% for link in  @all_links %>
+<%= link %>
 <br/>
 <% end %>
 <br/>
-<% for s in @search %>
-<%= s %>
+<%= @all_links.count %>
+<hr/>
+<% for link in  @top_adwords %>
+<%= link %>
 <br/>
 <% end %>
+<br/>
+<%= @top_adwords.count %>
+<hr/>
+<% for link in  @right_adwords %>
+<%= link %>
+<br/>
+<% end %>
+<br/>
+<%= @right_adwords.count %>
+<hr/>
+<%= @total_adwords %>
+<br/>
+<% for link in  @all_non_adwords %>
+<%= link %>
+<br/>
+<% end %>
+<br/>
+<%= @all_non_adwords.count %>
+<hr/>
