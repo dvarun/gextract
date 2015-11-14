@@ -14,7 +14,7 @@ class KeywordsController < ApplicationController
 
  def create
   myfile = params[:file]
-  
+
   begin
    CSV.foreach(myfile.path) do |row|
     @keyword = Keyword.new
@@ -42,9 +42,9 @@ class KeywordsController < ApplicationController
 
     search_key = keyword.word.gsub! ' ','+'
     if search_key.nil?
-     page = open "https://www.google.com/search?q=#{keyword.word}"
+     page = open "http://www.google.com/search?q=#{keyword.word}"
     else
-     page = open "https://www.google.com/search?q=#{search_key}"
+     page = open "http://www.google.com/search?q=#{search_key}"
     end
     #page = open "http://www.google.com/search?q=hello"
     doc = Nokogiri::HTML page
@@ -158,6 +158,11 @@ class KeywordsController < ApplicationController
   # @search << doc.search('//div[@id="resultStats"]/text()').to_s
   #
   # @search << doc.search('//*')
+
+ end
+
+ def show
+   @keyword = current_user.keywords.find(params[:id])
 
  end
 

@@ -1,0 +1,12 @@
+<h3> <%= @keyword.word %> </h3>
+<ul>
+ <% for url in @keyword.keyword_results %>
+ <% if url.top_url.nil? && url.right_url.nil? %>
+ <li><%= url.normal_url %></li>
+ <% elsif url.top_url.nil? && url.normal_url.nil?  %>
+ <li>Green:<%= url.right_url %></li>
+ <% elsif url.right_url.nil? && url.normal_url.nil?  %>
+ <li>Green:<%= url.top_url %></li>
+ <% end %>
+ <% end %>
+</ul>

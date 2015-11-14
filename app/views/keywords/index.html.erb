@@ -2,7 +2,7 @@
 <table class="table table-bordered table-hover">
  <tr>
   <th>Keyword</th>
-  <th>Total adword count</th>
+  <th>Total adwords count</th>
   <th>Total Normal Count</th>
   <th>Total Count</th>
   <th>Data Analyzed at</th>
@@ -13,13 +13,19 @@
  </tr>
  <% else %>
  <% @keyword.each do |keyword| %>
+ <% if keyword.keyword_count.nil? %>
  <tr>
-  <td><%= keyword.word%></td>
+  <td colspan="5"> No Data Available! </td>
+ </tr>
+ <% else %>
+ <tr>
+  <td><%= link_to "#{keyword.word}", keyword_path(keyword.id)%></td>
   <td><%= keyword.keyword_count.total_adword_count %></td>
   <td><%= keyword.keyword_count.normal_count %></td>
   <td><%= keyword.keyword_count.total_count %></td>
   <td><%= keyword.keyword_count.created_at.strftime("%d %B %Y") %></td>
  </tr>
+ <% end %>
  <% end %>
  <% end %>
 </table>
