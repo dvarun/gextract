@@ -45,9 +45,11 @@ class KeywordsController < ApplicationController
      @all_links << node.text
     end
 
-    doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords
-     @top_adwords << node.text
-    end
+    # doc.xpath('//div[@id="tvcap"/div[@id="tads"]//cite').each do |node| #top_adwords
+    #  @top_adwords << node.text
+    # end
+
+    @top_adwords << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s
 
     doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords_url
      @top_adwords_url << node.text
