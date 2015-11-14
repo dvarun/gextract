@@ -13,7 +13,12 @@ class KeywordsController < ApplicationController
  end
 
  def create
+  if params[:file].nil? || params[:file].empty?
+   redirect_to new_keyword_path, notice: "please select file before submitting!"
+  else
   myfile = params[:file]
+  end
+
   CSV.foreach(myfile.path) do |row|
    @keyword = Keyword.new
    @keyword.word = row.shift.strip
