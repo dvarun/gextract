@@ -75,7 +75,7 @@ class KeywordsController < ApplicationController
     doc.xpath('//div[@id="res"]//h3').each do |node| #all_non_adwords
      @all_non_adwords << node.text
     end
-    @keyword_count.normal_count = @all_non_adwords.coun
+    @keyword_count.normal_count = @all_non_adwords.count
 
     doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords_url
      @all_non_adwords_url << node.text
