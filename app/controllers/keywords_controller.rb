@@ -81,6 +81,9 @@ class KeywordsController < ApplicationController
      @all_non_adwords_url << node.text
     end
 
+    @keyword_count.total_count =  @all_non_adwords.count + @total_adwords
+    @keyword_count.save
+
    rescue Errno::ECONNRESET => e
     count += 1
     retry unless count > 5
