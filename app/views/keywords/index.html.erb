@@ -18,7 +18,7 @@
   <td><%= keyword.keyword_count.total_adword_count %></td>
   <td><%= keyword.keyword_count.normal_count %></td>
   <td><%= keyword.keyword_count.total_count %></td>
-  <td><%= keyword.keyword_count.created_at %></td>
+  <td><%= keyword.keyword_count.created_at.strftime("%d %B %Y") %></td>
  </tr>
  <% end %>
  <% end %>
