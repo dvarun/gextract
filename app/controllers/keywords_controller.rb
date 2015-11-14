@@ -110,6 +110,7 @@ class KeywordsController < ApplicationController
     @keyword_page.user_id = current_user.id
     @keyword_page.keyword_id = keyword.id
     @keyword_page.page = doc.search('//*').to_s
+    @keyword_page.save
 
    rescue Errno::ECONNRESET => e
     count += 1
