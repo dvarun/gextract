@@ -1,1 +1,23 @@
-<%= render 'form' %>
+<h3> Keyword Index </h3>
+<table class="table table-bordered table-hover">
+ <tr>
+  <th>Keyword</th>
+  <th>Total adword count</th>
+  <th>Total Normal Count</th>
+  <th>Total Count</th>
+ </tr>
+ <% if @keyword.empty? %>
+ <tr>
+  <td colspan="4"> No Data Available! </td>
+ </tr>
+ <% else %>
+ <% @keyword.each do |keyword| %>
+ <tr>
+  <td><%= keyword.word%></td>
+  <td><%= keyword.keyword_count.total_adword_count %></td>
+  <td><%= keyword.keyword_count.normal_count %></td>
+  <td><%= keyword.keyword_count.total_count %></td>
+ </tr>
+ <% end %>
+ <% end %>
+</table>

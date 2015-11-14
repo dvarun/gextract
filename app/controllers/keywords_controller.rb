@@ -5,7 +5,7 @@ class KeywordsController < ApplicationController
  require 'open-uri'
  before_filter :authenticate_user!
  def index
-
+  @keyword = Keyword.where(user_id: current_user.id)
  end
 
  def new
