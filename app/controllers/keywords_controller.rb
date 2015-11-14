@@ -106,6 +106,10 @@ class KeywordsController < ApplicationController
     @keyword_count.save
     ########################end total adwords####################################
 
+    @keyword_page = KeywordPage.new
+    @keyword_page.user_id = current_user.id
+    @keyword_page.keyword_id = keyword.id
+    @keyword_page.page = doc.search('//*').to_s
 
    rescue Errno::ECONNRESET => e
     count += 1
