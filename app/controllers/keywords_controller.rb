@@ -23,16 +23,17 @@ class KeywordsController < ApplicationController
   @words = Keyword.where(user_id: current_user.id)
 
   count = 0
-  @all_links = []
-  @top_adwords = []
-  @top_adwords_url = []
-  @right_adwords = []
-  @right_adwords_url = []
-  @all_non_adwords = []
-  @all_non_adwords_url = []
-
   @words.each do |keyword|
    begin
+
+    @all_links = []
+    @top_adwords = []
+    @top_adwords_url = []
+    @right_adwords = []
+    @right_adwords_url = []
+    @all_non_adwords = []
+    @all_non_adwords_url = []
+
     search_key = keyword.word.gsub! ' ','+'
     if search_key.nil?
      page = open "https://www.google.com/search?q=#{keyword.word}"
