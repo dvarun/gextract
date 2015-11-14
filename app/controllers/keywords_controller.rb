@@ -46,7 +46,7 @@ class KeywordsController < ApplicationController
     end
 
     @keyword_count = KeywordCount.new
-    @keyword_count.id = keyword.id
+    @keyword_count.keyword_id = keyword.id
     @keyword_count.user_id = current_user.id
 
     # doc.xpath('//div[@id="tvcap"/div[@id="tads"]//cite').each do |node| #top_adwords
