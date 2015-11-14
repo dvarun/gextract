@@ -45,33 +45,42 @@ class KeywordsController < ApplicationController
      @all_links << node.text
     end
 
+    @keyword_count = KeywordCount.new
+    @keyword_count.id = keyword.id
+    @keyword_count.user_id = current_user.id
+
     # doc.xpath('//div[@id="tvcap"/div[@id="tads"]//cite').each do |node| #top_adwords
     #  @top_adwords << node.text
     # end
 
-    @top_adwords << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').to_s
-
+    @top_adwords << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').size
     doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords_url
      @top_adwords_url << node.text
     end
+    @keyword_count.top_count = @top_adwords.count
+
 
     doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').each do |node| #right_adwords
      @right_adwords << node.text
     end
-
+    @keyword_count.right_count = @right_adwords.count
     doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').each do |node| #right_adwords_url
      @right_adwords_url << node.text
     end
+    @keyword_count.right_count = @right_adwords.count
+
 
     @total_adwords = @top_adwords.count +  @right_adwords.count
 
     doc.xpath('//div[@id="res"]//h3').each do |node| #all_non_adwords
      @all_non_adwords << node.text
     end
+    @keyword_count.normal_count = @all_non_adwords.coun
 
     doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords_url
      @all_non_adwords_url << node.text
     end
+
    rescue Errno::ECONNRESET => e
     count += 1
     retry unless count > 5
