@@ -35,9 +35,9 @@ class KeywordsController < ApplicationController
    begin
     search_key = keyword.word.gsub! ' ','+'
     if search_key.nil?
-     page = open "https://www.google.com/search?q=#{keyword.word}"
+     page = open "http://www.google.com/search?q=#{keyword.word}"
     else
-     page = open "https://www.google.com/search?q=#{search_key}"
+     page = open "http://www.google.com/search?q=#{search_key}"
     end
     #page = open "http://www.google.com/search?q=hello"
     doc = Nokogiri::HTML page
@@ -49,29 +49,41 @@ class KeywordsController < ApplicationController
     @keyword_count.keyword_id = keyword.id
     @keyword_count.user_id = current_user.id
 
-    # doc.xpath('//div[@id="tvcap"/div[@id="tads"]//cite').each do |node| #top_adwords
-    #  @top_adwords << node.text
-    # end
 
-    @top_adwords << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').size
+    ########################top adwords####################################
+    doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords
+     @top_adwords << node.text
+    end
+    @test = doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').size
     doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords_url
      @top_adwords_url << node.text
     end
     @keyword_count.top_count = @top_adwords.count
+    ########################end top adwords####################################
 
 
+
+    ########################right adwords####################################
     doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').each do |node| #right_adwords
      @right_adwords << node.text
     end
-    @keyword_count.right_count = @right_adwords.count
     doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').each do |node| #right_adwords_url
      @right_adwords_url << node.text
     end
     @keyword_count.right_count = @right_adwords.count
+    ########################rnd right adwords####################################
 
 
+
+
+    ########################total adwords####################################
     @total_adwords = @top_adwords.count +  @right_adwords.count
+    @keyword_count.total_adword_count =  @total_adwords
+    ########################end total adwords####################################
 
+
+
+    ########################non adwords####################################
     doc.xpath('//div[@id="res"]//h3').each do |node| #all_non_adwords
      @all_non_adwords << node.text
     end
@@ -80,9 +92,15 @@ class KeywordsController < ApplicationController
     doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords_url
      @all_non_adwords_url << node.text
     end
+    ########################endnon adwords####################################
 
+
+
+    ########################total adwords####################################
     @keyword_count.total_count =  @all_non_adwords.count + @total_adwords
     @keyword_count.save
+    ########################end total adwords####################################
+
 
    rescue Errno::ECONNRESET => e
     count += 1
