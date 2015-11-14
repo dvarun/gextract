@@ -53,11 +53,12 @@ class KeywordsController < ApplicationController
 
     ########################top adwords####################################
     doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords
+     @keyword_result = KeywordResult.new
+     @keyword_result.user_id = current_user.id
+     @keyword_result.keyword_id = keyword.id
+     @keyword_result.top_url = node.text
+     @keyword_result.save
      @top_adwords << node.text
-    end
-    @test = doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').size
-    doc.xpath('//div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords_url
-     @top_adwords_url << node.text
     end
     @keyword_count.top_count = @top_adwords.count
     ########################end top adwords####################################
@@ -65,14 +66,16 @@ class KeywordsController < ApplicationController
 
 
     ########################right adwords####################################
-    doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').each do |node| #right_adwords
+    doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').each do |node| #right_adwords
+     @keyword_result = KeywordResult.new
+     @keyword_result.user_id = current_user.id
+     @keyword_result.keyword_id = keyword.id
+     @keyword_result.right_url = node.text
+     @keyword_result.save
      @right_adwords << node.text
     end
-    doc.xpath('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').each do |node| #right_adwords_url
-     @right_adwords_url << node.text
-    end
     @keyword_count.right_count = @right_adwords.count
-    ########################rnd right adwords####################################
+    ########################end right adwords####################################
 
 
 
@@ -85,14 +88,15 @@ class KeywordsController < ApplicationController
 
 
     ########################non adwords####################################
-    doc.xpath('//div[@id="res"]//h3').each do |node| #all_non_adwords
+    doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords
+     @keyword_result = KeywordResult.new
+     @keyword_result.user_id = current_user.id
+     @keyword_result.keyword_id = keyword.id
+     @keyword_result.normal_url = node.text
+     @keyword_result.save
      @all_non_adwords << node.text
     end
     @keyword_count.normal_count = @all_non_adwords.count
-
-    doc.xpath('//div[@id="res"]//cite').each do |node| #all_non_adwords_url
-     @all_non_adwords_url << node.text
-    end
     ########################endnon adwords####################################
 
 
