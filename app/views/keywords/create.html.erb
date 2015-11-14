@@ -4,35 +4,28 @@
 <br/>
 <% end %>
 <br/>
-<%= @all_links.count %>
+All links:<%= @all_links.count %>
 <hr/>
 <% for link in  @top_adwords %>
 <%= link %>
 <br/>
 <% end %>
 <br/>
-<%= @top_adwords_url.count %>
+Top adwords:<%= @top_adwords.count %>
 <hr/>
 <% for link in  @right_adwords %>
 <%= link %>
 <br/>
 <% end %>
 <br/>
-<%= @right_adwords_url.count %>
+Right adwords:<%= @right_adwords.count %>
 <hr/>
-<%= @total_adwords %>
+Total adwords:<%= @total_adwords %>
 <br/>
 <% for link in  @all_non_adwords %>
 <%= link %>
 <br/>
 <% end %>
 <br/>
-<%= @all_non_adwords.count %>
-<hr/>
-<% for link in  @stored_words %>
-<%= link %>
-<br/>
-<% end %>
-<br/>
-<%= @stored_words.count %>
+All non adwords:<%= @all_non_adwords.count %>
 <hr/>

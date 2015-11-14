@@ -30,7 +30,6 @@ class KeywordsController < ApplicationController
   @right_adwords_url = []
   @all_non_adwords = []
   @all_non_adwords_url = []
-  @stored_words = []
 
   @words.each do |keyword|
    begin
