@@ -42,9 +42,9 @@ class KeywordsController < ApplicationController
 
     search_key = keyword.word.gsub! ' ','+'
     if search_key.nil?
-     page = open "https://www.google.com/search?q=#{keyword.word}"
+     page = open "http://www.google.com/search?q=#{keyword.word}"
     else
-     page = open "https://www.google.com/search?q=#{search_key}"
+     page = open "http://www.google.com/search?q=#{search_key}"
     end
     #page = open "http://www.google.com/search?q=hello"
     doc = Nokogiri::HTML page
@@ -124,41 +124,6 @@ class KeywordsController < ApplicationController
     retry unless count > 5
    end
   end
-
-  #page = open "http://www.google.com/search?q=best+vps+Hosting"
-
-
-
-  # @keyword_count = KeywordCount.new
-  # @keyword_count.id = 1
-  # @keyword_count.user_id = current_user.id
-  # @keyword_count.top_count = @top_adwords.count
-  # @keyword_count.right_count = @right_adwords.count
-  # @keyword_count.total_adword_count =  @total_adwords
-  # @keyword_count.normal_count = @all_non_adwords.count
-  # @keyword_count.total_count =  @all_non_adwords.count + @total_adwords
-  # @keyword_count.save
-
-
-  # @search = []
-  # @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s #top_adwords
-  # @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').to_s #top_adwords_url
-  # #
-  # @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').to_s #right_adwords
-  # @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').to_s #right_adwords_url
-  #
-  # @search << doc.search('//li[@class="ads-ad"]/h3/a').to_s #all_adwords
-  # @search << doc.search('//li[@class="ads-ad"]//cite').to_s #all_adwords_url
-  #
-  # @search << doc.search('//div[@id="res"]//h3').to_s #all_non_adwords
-  # @search << doc.search('//div[@id="res"]//cite').to_s #all_non_adwords_url
-  #
-  # #@search << doc.search('//div[@id="res"]//cite').to_s #all_non_adwords_url
-  # @search << doc.search('//cite').to_s #all_links
-  #
-  # @search << doc.search('//div[@id="resultStats"]/text()').to_s
-  #
-  # @search << doc.search('//*')
 
  end
 
