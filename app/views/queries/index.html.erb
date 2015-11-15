@@ -2,7 +2,7 @@
 <%= form_tag({:action => :create}) do %>
 <div class="form-group">
  <label for="file">Search</label>
- <%= text_field_tag :query %>
+ <%= text_field_tag :query, nil, :required => true %>
  <%= submit_tag "run", :class => "btn btn-primary" %>
 </div>
 <% end %>
