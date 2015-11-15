@@ -62,7 +62,7 @@ class KeywordsController < ApplicationController
      @keyword_result = KeywordResult.new
      @keyword_result.user_id = current_user.id
      @keyword_result.keyword_id = keyword.id
-     @keyword_result.top_url = node.text
+     @keyword_result.top_url = doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s 
      @keyword_result.save
      @top_adwords << node.text
     end
