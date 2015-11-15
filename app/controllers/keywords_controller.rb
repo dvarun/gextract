@@ -62,7 +62,7 @@ class KeywordsController < ApplicationController
      @keyword_result = KeywordResult.new
      @keyword_result.user_id = current_user.id
      @keyword_result.keyword_id = keyword.id
-     @keyword_result.top_url = doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s 
+     @keyword_result.top_url = doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s
      @keyword_result.save
      @top_adwords << node.text
     end
@@ -141,12 +141,12 @@ class KeywordsController < ApplicationController
   # @keyword_count.save
 
 
-
-  # @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s #top_adwords
-  # @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').to_s #top_adwords_url
+@search = []
+  @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s #top_adwords
+  @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').to_s #top_adwords_url
   #
-  # @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').to_s #right_adwords
-  # @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').to_s #right_adwords_url
+  @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').to_s #right_adwords
+  @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').to_s #right_adwords_url
   #
   # @search << doc.search('//li[@class="ads-ad"]/h3/a').to_s #all_adwords
   # @search << doc.search('//li[@class="ads-ad"]//cite').to_s #all_adwords_url
