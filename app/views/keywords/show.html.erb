@@ -4,9 +4,9 @@
  <% if url.top_url.nil? && url.right_url.nil? %>
  <li><%= url.normal_url %></li>
  <% elsif url.top_url.nil? && url.normal_url.nil?  %>
- <li>Green:<%= url.right_url %></li>
+ <li style="color:#388E3C;"><%= url.right_url %></li>
  <% elsif url.right_url.nil? && url.normal_url.nil?  %>
- <li>Green:<%= url.top_url %></li>
+ <li style="color:#388E3C;"><%= url.top_url %></li>
  <% end %>
  <% end %>
 </ul>
