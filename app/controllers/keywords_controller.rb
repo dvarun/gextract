@@ -109,8 +109,10 @@ class KeywordsController < ApplicationController
 
     ########################total adwords####################################
     @keyword_count.total_count =  @all_non_adwords.count + @total_adwords
+    @keyword_count.total_result = doc.search('//div[@id="resultStats"]/text()').to_s
     @keyword_count.save
     ########################end total adwords####################################
+
 
     @keyword_page = KeywordPage.new
     @keyword_page.user_id = current_user.id
