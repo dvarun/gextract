@@ -58,7 +58,7 @@ class KeywordsController < ApplicationController
 
 
     ########################top adwords####################################
-    doc.xpath('//html/body[@id="gsr"]/div[@id="main"]/div[@id="cnt"]/div[@class="mw"][2]/div[@id="rcnt"]/div[@class="col"][1]/div[@id="center_col"]/div[@id="taw"]/div[@id="tvcap"]/div[@id="tads"]//cite').each do |node| #top_adwords
+    doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').each do |node| #top_adwords
      @keyword_result = KeywordResult.new
      @keyword_result.user_id = current_user.id
      @keyword_result.keyword_id = keyword.id
