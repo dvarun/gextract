@@ -6,7 +6,7 @@ class QueriesController < ApplicationController
 
   def create
    @query = params[:query]
-   @search = Keyword.where("word like %?% AND user_id = ?",@query,current_user.id)
+   @search = Keyword.where("word like ? AND user_id = ?","%#{@query}%",current_user.id)
   end
 
 
