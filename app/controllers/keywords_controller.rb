@@ -58,11 +58,11 @@ class KeywordsController < ApplicationController
 
 
     ########################top adwords####################################
-    doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').each do |node| #top_adwords
+    doc.xpath('//div[@class="mw"][2]/div[@id="rcnt"]/div[@class="col"][1]/div[@id="center_col"]/div[@id="taw"]/div[@id="tvcap"]/div[@id="tads"]/ol/li[@class="ads-ad"]/div[@class="ads-visurl"]/cite').each do |node| #top_adwords
      @keyword_result = KeywordResult.new
      @keyword_result.user_id = current_user.id
      @keyword_result.keyword_id = keyword.id
-     @keyword_result.top_url = doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s
+     @keyword_result.top_url = node.text
      @keyword_result.save
      @top_adwords << node.text
     end
@@ -141,12 +141,12 @@ class KeywordsController < ApplicationController
   # @keyword_count.save
 
 
-@search = []
-  @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s #top_adwords
-  @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').to_s #top_adwords_url
-  #
-  @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').to_s #right_adwords
-  @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').to_s #right_adwords_url
+  # @search = []
+  # @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]/h3/a').to_s #top_adwords
+  # @search << doc.search('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').to_s #top_adwords_url
+  # #
+  # @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]/h3/a').to_s #right_adwords
+  # @search << doc.search('//div[@id="rhs_block"]//li[@class="ads-ad"]//cite').to_s #right_adwords_url
   #
   # @search << doc.search('//li[@class="ads-ad"]/h3/a').to_s #all_adwords
   # @search << doc.search('//li[@class="ads-ad"]//cite').to_s #all_adwords_url
@@ -164,7 +164,7 @@ class KeywordsController < ApplicationController
  end
 
  def show
-   @keyword = current_user.keywords.find(params[:id])
+  @keyword = current_user.keywords.find(params[:id])
 
  end
 
