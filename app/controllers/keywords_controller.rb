@@ -109,7 +109,7 @@ class KeywordsController < ApplicationController
 
     ########################total adwords####################################
     @keyword_count.total_count =  @all_non_adwords.count + @total_adwords
-    @keyword_count.total_result = doc.search('//div[@id="resultStats"]/text()').to_s
+    @keyword_count.total_result = doc.search('//div[@id="resultStats"]/text()')
     @keyword_count.save
     ########################end total adwords####################################
 
