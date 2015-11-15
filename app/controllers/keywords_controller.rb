@@ -58,7 +58,7 @@ class KeywordsController < ApplicationController
 
 
     ########################top adwords####################################
-    doc.xpath('//div[@class="mw"][2]/div[@id="rcnt"]/div[@class="col"][1]/div[@id="center_col"]/div[@id="taw"]/div[@id="tvcap"]/div[@id="tads"]/ol/li[@class="ads-ad"]/div[@class="ads-visurl"]/cite').each do |node| #top_adwords
+    doc.xpath('//div[@id="tvcap"]//li[@class="ads-ad"]//cite').each do |node| #top_adwords
      @keyword_result = KeywordResult.new
      @keyword_result.user_id = current_user.id
      @keyword_result.keyword_id = keyword.id
@@ -104,7 +104,6 @@ class KeywordsController < ApplicationController
     end
     @keyword_count.normal_count = @all_non_adwords.count
     ########################endnon adwords####################################
-
 
 
     ########################total adwords####################################
