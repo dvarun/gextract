@@ -1,0 +1,37 @@
+<% if @search.empty? %>
+No data found
+<%else %>
+<table class="table table-striped">
+ <tr>
+  <th>Search Result</th>
+  <th>Total adwords count</th>
+  <th>Total Normal Count</th>
+  <th>Total Count</th>
+  <th>Data Analyzed at</th>
+ </tr>
+ <% @search.each do |result| %>
+ <tr>
+  <td><%= result.word %></td>
+  <td><%= result.keyword_count.total_adword_count %></td>
+  <td><%= result.keyword_count.normal_count %></td>
+  <td><%= result.keyword_count.total_count %></td>
+  <td><%= result.keyword_count.created_at.strftime("%d %B %Y") %></td>
+ </tr>
+ <% end %>
+</table>
+<% end %>
+<hr/>
+<% @search.each do |result| %>
+<ul class="nav">
+ <% for url in result.keyword_results %>
+ <% if url.top_url.nil? && url.right_url.nil? %>
+ <li><%= url.normal_url %></li>
+ <% elsif url.top_url.nil? && url.normal_url.nil?  %>
+ <li style="color:#1B5E20;"><b><%= url.right_url %></b></li>
+ <% elsif url.right_url.nil? && url.normal_url.nil?  %>
+ <li style="color:#1B5E20;"><b><%= url.top_url %></b></li>
+ <% end %>
+ <% end %>
+</ul>
+<% end %>
+<hr/>

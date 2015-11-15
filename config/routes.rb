@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+
  devise_for :users
 
  resources :keywords
  resources :keyword_counts
  resources :keyword_results
+ resources :queries
+
+ get 'queries/delete_all_data'
 
  root 'home#index'
  # The priority is based upon order of creation: first created -> highest priority.

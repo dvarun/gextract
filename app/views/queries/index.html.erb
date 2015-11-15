@@ -1,0 +1,8 @@
+<h3> Run Query </h3>
+<%= form_tag({:action => :create}) do %>
+<div class="form-group">
+ <label for="file">Search</label>
+ <%= text_field_tag :query %>
+ <%= submit_tag "run", :class => "btn btn-primary" %>
+</div>
+<% end %>
