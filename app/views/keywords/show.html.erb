@@ -1,5 +1,5 @@
 <h3> <%= @keyword.word %> </h3>
-<ul>
+<ul class="nav">
  <% for url in @keyword.keyword_results %>
  <% if url.top_url.nil? && url.right_url.nil? %>
  <li><%= url.normal_url %></li>
