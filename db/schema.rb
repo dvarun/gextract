@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115063615) do
+ActiveRecord::Schema.define(version: 20151115090431) do
 
   create_table "keyword_counts", force: :cascade do |t|
     t.integer  "user_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20151115063615) do
     t.string   "normal_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "excerpt"
   end
 
   create_table "keywords", force: :cascade do |t|
