@@ -76,9 +76,10 @@
     <div class="well sidebar-nav">
      <h3>Menu</h3>
      <ul class="nav nav-list">
+      <li><%= link_to "Home",keywords_path %> </li>
       <li><%= link_to "Upload keywords", new_keyword_path %></li>
       <li><%= link_to "Run Query", queries_path %></li>
-      <li><%= link_to "Delete all records", queries_delete_all_data_path%></li>
+      <li><%#= link_to "Delete all records", queries_delete_all_data_path%></li>
      </ul>
     </div><!--/.well -->
    </div><!--/span-->
