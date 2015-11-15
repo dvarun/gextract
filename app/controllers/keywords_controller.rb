@@ -129,7 +129,6 @@ class KeywordsController < ApplicationController
 
  def show
   @keyword = current_user.keywords.find(params[:id])
-
  end
 
 end
