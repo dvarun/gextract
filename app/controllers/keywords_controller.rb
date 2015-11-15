@@ -42,9 +42,9 @@ class KeywordsController < ApplicationController
 
     search_key = keyword.word.gsub! ' ','+'
     if search_key.nil?
-     page = open "https://www.google.com/search?q=#{keyword.word}"
+     page = open "http://www.google.com/search?q=#{keyword.word}"
     else
-     page = open "https://www.google.com/search?q=#{search_key}"
+     page = open "http://www.google.com/search?q=#{search_key}"
     end
     #page = open "http://www.google.com/search?q=hello"
     doc = Nokogiri::HTML page

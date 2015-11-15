@@ -8,4 +8,10 @@ Total adwords:<%= @total_adwords %>
 <hr/>
 All non adwords:<%= @all_non_adwords.count %> -->
 Success!
-<%= link_to "Go Back to Keyword Page". keyword_path %>
+<%= link_to "Go Back to Keyword Page". keywords_path %>
+
+<% @all_links.each do |links| %>
+
+<%= links %>
+<br/>
+<% end %>
