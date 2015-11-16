@@ -1,8 +1,9 @@
 class FetchKeywordJob < ActiveJob::Base
-  queue_as :default
+ queue_as :default
 
-  def perform(user_id)
-   words = Keyword.where(user_id: user_id)
+ def perform(user_id,added_words)
+  ActiveRecord::Base.connection_pool.with_connection do
+   words = Keyword.where(user_id: user_id).order(id: :desc).limit(added_words).reverse
 
    counter = 0
    words.each do |keyword|
@@ -100,9 +101,8 @@ class FetchKeywordJob < ActiveJob::Base
      retry unless counter > 5
     end
    end
-
-
-
-
   end
+
+
+ end
 end

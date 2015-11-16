@@ -14,6 +14,7 @@ class KeywordsController < ApplicationController
 
  def create
   myfile = params[:file]
+  word_count_csv = 0
 
 
   begin
@@ -22,13 +23,14 @@ class KeywordsController < ApplicationController
     @keyword.word = row.shift.strip
     @keyword.user_id = current_user.id
     @keyword.save
+    word_count_csv += 1
    end
   rescue
    redirect_to new_keyword_path, notice: "please select file before submitting!"
   end
 
   #@words = Keyword.where(user_id: current_user.id)
-  FetchKeywordJob.perform_later(current_user.id)
+  FetchKeywordJob.perform_later(current_user.id,word_count_csv)
 
   # count = 0
   # @words.each do |keyword|
