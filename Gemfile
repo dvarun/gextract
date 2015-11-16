@@ -12,7 +12,7 @@ group :development, :test do
   gem "sqlite3"
 end
 gem "activejob"
-gem "queue_classic", "~> 3.0.0"
+gem 'sucker_punch'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
